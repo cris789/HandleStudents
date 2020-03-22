@@ -14,16 +14,16 @@ namespace handleStudents.Models
 
     public enum Gender
     {
-        Male,
-        Female,
-        Other
+        M,
+        F
     }
 
     public class Student
     {
-        private string Name { get; set; }
-        private string LastName { get; set; }
+        public Guid Id { get; set; }
+        public string Name { get; set; }
         public StudentType  StudentType { get; set; }
         public Gender Gender { get; set; }
+        public DateTime EnrollmentDate { get; set; }
     }
 }
