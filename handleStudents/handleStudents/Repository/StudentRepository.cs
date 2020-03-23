@@ -54,7 +54,6 @@ namespace handleStudents.Repository
 
         public Student AddNewStudent(Student student)
         {
-            student.EnrollmentDate = DateTime.Now;
             _students.Add(student);
             return student;
         }

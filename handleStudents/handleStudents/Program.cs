@@ -1,6 +1,7 @@
 ﻿using handleStudents.Models;
 using handleStudents.Repository;
 using handleStudents.Services;
+using handleStudents.Tools;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
@@ -13,14 +14,15 @@ namespace handleStudents
         static void Main(string[] args)
         {
             RegisterServices();
-            
 
             var studentService = _serviceProvider.GetService<IStudentService>();
+            var mockTool = _serviceProvider.GetService<IMockTool>();
 
 
             DisposeServices();
 
             Console.WriteLine("Welcome to console app to handle students!");
+            mockTool.InsertStudents();
 
         Start:
             Console.WriteLine("Please select an option");
@@ -84,6 +86,7 @@ namespace handleStudents
 
             collection.AddScoped<IStudentRepository, StudentRepository>();
             collection.AddScoped<IStudentService, StudentService>();
+            collection.AddScoped<IMockTool, MockTool>();
 
             _serviceProvider = collection.BuildServiceProvider();
 
