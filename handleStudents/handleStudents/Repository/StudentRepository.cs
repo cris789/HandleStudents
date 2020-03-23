@@ -60,6 +60,7 @@ namespace handleStudents.Repository
 
         public Student AddNewStudent(Student student)
         {
+            student.Name = student.Name.ToLower();
             _students.Add(student);
             return student;
         }
