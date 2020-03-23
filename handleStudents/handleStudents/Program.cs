@@ -1,5 +1,6 @@
 ﻿using handleStudents.Models;
 using handleStudents.Repository;
+using handleStudents.Services;
 using System;
 
 namespace handleStudents
@@ -11,6 +12,7 @@ namespace handleStudents
             Console.WriteLine("Hello World!");
             
             StudentRepository repository = new StudentRepository();
+            StudentService studentService = new StudentService();
             Student student = new Student();
             student.Id = Guid.NewGuid();
             student.Name = "jino";
@@ -40,81 +42,22 @@ namespace handleStudents
             switch (userChoise)
             {
                 case 1:
-                    Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
-                    Console.WriteLine("Student ID                             Name       kind of student    Gender      Enrollment date" );
-                    foreach ( Student user in repository.GetAllStudents() ) 
-                    {
-                        Console.WriteLine($"{user.Id}   {user.Name}       {user.StudentType}              {user.Gender}           {user.EnrollmentDate}");
-                    }
-                    Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
+                    studentService.GetAllStudents();
                     goto Start;
                 case 2:
-                    Student x = new Student();
-                    Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
-                    Console.WriteLine("Please, insert the name of your student");
-                    string name = Console.ReadLine();
-                    Console.WriteLine("Please, insert kind of student, you can choose between kinder, elementary, high and university");
-                    string studentType = Console.ReadLine();
-                    var typeStudent = (StudentType)Enum.Parse(typeof(StudentType), studentType);
-                    Console.WriteLine("Please, insert the gender of your student, you can choose between M(Male) and F(Female)");
-                    string genderStudent = Console.ReadLine();
-                    var typeStudentGender = (Gender)Enum.Parse(typeof(Gender), genderStudent);
-                    x.Id = Guid.NewGuid();
-                    x.Name = name;
-                    x.StudentType = typeStudent;
-                    x.Gender = typeStudentGender;
-                    Student resullt = repository.AddNewStudent(x);
-                    Console.WriteLine("Your student was stored successfully with the following information:");
-                    Console.WriteLine("Student ID                             Name       kind of student    Gender      Enrollment date");
-                    Console.WriteLine($"{resullt.Id}   {resullt.Name}       {resullt.StudentType}               {resullt.Gender}        {resullt.EnrollmentDate}");
-                    Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
+                    studentService.RegisterStudent();
                     goto Start;
                 case 3:
-                    Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
-                    Console.WriteLine("Please, insert the ID of your student to delete");
-                    string studentId = Console.ReadLine();
-                    repository.DeleteStudent(studentId);
-                    Console.WriteLine("Student ID                             Name       kind of student    Gender      Enrollment date");
-                    foreach (Student user in repository.GetAllStudents())
-                    {
-                        Console.WriteLine($"{user.Id}   {user.Name}       {user.StudentType}              {user.Gender}        {user.EnrollmentDate}");
-                    }
-                    Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
+                    studentService.RemoveStudent();
                     goto Start;
                 case 4:
-                    Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
-                    Console.WriteLine("Please, insert the student name to search");
-                    string nameStudent = Console.ReadLine();
-                    Console.WriteLine("Student ID                             Name       kind of student    Gender      Enrollment date");
-                    foreach (Student user in repository.GetStudentsByName(nameStudent))
-                    {
-                        Console.WriteLine($"{user.Id}   {user.Name}       {user.StudentType}              {user.Gender}        {user.EnrollmentDate}");
-                    }
-                    Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
+                    studentService.SearchStudentsByName();
                     goto Start;
                 case 5:
-                    Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
-                    Console.WriteLine("Please, insert the type fo student search,  you can choose between kinder, elementary, high and university");
-                    string studentType2 = (Console.ReadLine()).ToLower();
-                    Console.WriteLine("Student ID                             Name       kind of student    Gender      Enrollment date");
-                    foreach (Student user in repository.GetStudentsByTypeOfStudent(studentType2))
-                    {
-                        Console.WriteLine($"{user.Id}   {user.Name}       {user.StudentType}              {user.Gender}        {user.EnrollmentDate}");
-                    }
-                    Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
+                    studentService.SearchStudentsByTypeOfStudent();
                     goto Start;
                 case 6:
-                    Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
-                    Console.WriteLine("Searh student by gender and type");
-                    Console.WriteLine("Please, insert kind of student, you can choose between kinder, elementary, high and university");
-                    string studentType3 = (Console.ReadLine()).ToLower();
-                    Console.WriteLine("Please, insert the gender of your student, you can choose between M(Male) and F(Female)");
-                    string genderStudent2 = (Console.ReadLine()).ToUpper();
-                    foreach (Student user in repository.GetStudentsByGenderAndElementary(genderStudent2, studentType3))
-                    {
-                        Console.WriteLine($"{user.Id}   {user.Name}       {user.StudentType}              {user.Gender}        {user.EnrollmentDate}");
-                    }
-                    Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
+                    studentService.SearchStudentsByGenderAndElementary();
                     goto Start;
                 case 7:
                     break;
