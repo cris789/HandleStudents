@@ -12,6 +12,6 @@ namespace handleStudents.Repository
         public Boolean DeleteStudent(string id);
         public IEnumerable<Student> GetStudentsByName( string name);
         public IEnumerable<Student> GetStudentsByTypeOfStudent(string school);
-        public IEnumerable<Student> GetStudentsByGenderAndElementary(string gender, string studenTtype);
+        public IEnumerable<Student> GetStudentsByGenderAndType(string gender, string studenTtype);
     }
 }

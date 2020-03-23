@@ -16,11 +16,24 @@ namespace handleStudents.Services
             _studentRepository = studentRepository;
         }
 
+        /// <summary>
+        ///   This function return all students from studen list
+        ///   and send the information to print on console
+        /// </summary>
+        /// <returns>List of students </returns>
         public void GetAllStudents()
         {
             PrintStudents(_studentRepository.GetAllStudents());
         }
 
+        /// <summary>
+        ///   This function register a student
+        /// </summary>
+        /// <param name="name">the name of the student</param>
+        /// <param name="type">you can choose between kinder, elementary, high and university</param>
+        /// <param name="gender">you can choose between M(Male) and F(Female)</param>
+        /// <returns>Print on console the student that was registered</returns>
+        /// <response code="200">The token was generated.</response>
         public void RegisterStudent()
         {
             Student student= new Student();
@@ -47,6 +60,13 @@ namespace handleStudents.Services
             Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
         }
 
+        /// <summary>
+        ///   This function remove a student
+        /// </summary>
+        /// <param name="studentId">the student id</param>
+        /// <returns>Print on console the all students after to remove the student</returns>
+        /// <response boolean="true">confirm if the user was deleted</response>
+        /// <response boolean="false">"The student that you wish delete was not found</response>
         public void RemoveStudent()
         {
             Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
@@ -64,21 +84,42 @@ namespace handleStudents.Services
             }
         }
 
+        /// <summary>
+        ///   This function Search students by gender and type
+        /// </summary>
+        /// <param name="gender">insert the gender of student </param>
+        /// <param name="typeOfStudent">insert the type of student</param>
+        /// <returns>Print on console the all students order by most recent</returns>
         public void SearchStudentsByGenderAndType(string gender, string typeOfStudent)
         {
-            PrintStudents(_studentRepository.GetStudentsByGenderAndElementary(gender, typeOfStudent));
+            PrintStudents(_studentRepository.GetStudentsByGenderAndType(gender, typeOfStudent));
         }
 
+        /// <summary>
+        ///   This function search students by name
+        /// </summary>
+        /// <param name="name">insert the name of student </param>
+        /// <returns>Print on console the all students order by most recent</returns>
         public void SearchStudentsByName(string name)
         {
             PrintStudents(_studentRepository.GetStudentsByName(name));
         }
 
+        /// <summary>
+        ///   This function search students by type
+        /// </summary>
+        /// <param name="typeOfStudent">insert type of student </param>
+        /// <returns>Print on console the all students order by most recent</returns>
         public void SearchStudentsByTypeOfStudent(string typeOfStudent)
         {
             PrintStudents(_studentRepository.GetStudentsByTypeOfStudent(typeOfStudent));
         }
 
+        /// <summary>
+        ///   This function print students
+        /// </summary>
+        /// <param name="students"> insert IEnumerable<Student> this a students list </param>
+        /// <returns>Print on console the all students</returns>
         private void PrintStudents(IEnumerable<Student> students)
         {
             Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
@@ -90,6 +131,11 @@ namespace handleStudents.Services
             Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
         }
 
+        /// <summary>
+        ///   This function read csv file and send the information to add the student
+        /// </summary>
+        /// <param name="path">the path of the csv file</param>
+        /// <returns>Print on console the all students</returns>
         public void ReadCsvFile(string path)
         {
             using (StreamReader sr = new StreamReader(path))
@@ -113,6 +159,14 @@ namespace handleStudents.Services
             GetAllStudents();
         }
 
+        /// <summary>
+        ///   This function add student from csv file
+        /// </summary>
+        /// <param name="name">the name of the student</param>
+        /// <param name="typeOfStudent">you can choose between kinder, elementary, high and university</param>
+        /// <param name="gender">you can choose between M(Male) and F(Female)</param>
+        /// <param name="enrollment">insert the date of student enrollment on string</param>
+        /// <returns>return a student that was registered</returns>
         public Student AddStudentFromCsvFile(string name, string gender, string typeOfStudent, string enrollment)
         {
             Student student = new Student();
