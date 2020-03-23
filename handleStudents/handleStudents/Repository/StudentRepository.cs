@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using handleStudents.Exceptions;
 using handleStudents.Models;
 
 namespace handleStudents.Repository
@@ -17,11 +18,16 @@ namespace handleStudents.Repository
 
         public bool DeleteStudent(string id)
         {
-            Guid oldGuid = Guid.Parse(id);
-            var item = _students.SingleOrDefault(x => x.Id == oldGuid);
-            if (item != null)
-                _students.Remove(item);
-                return true;
+            try
+            {
+              Guid oldGuid = Guid.Parse(id);
+              var item = _students.SingleOrDefault(x => x.Id == oldGuid);
+              return _students.Remove(item);
+
+            } catch (Exception ex)
+            {
+                throw new RepositoryException($"Invalid student id: {id}");
+            }
         }
 
         public IEnumerable<Student> GetAllStudents()
