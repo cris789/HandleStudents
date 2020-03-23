@@ -64,7 +64,7 @@ namespace handleStudents.Services
             }
         }
 
-        public void SearchStudentsByGenderAndElementary(string gender, string typeOfStudent)
+        public void SearchStudentsByGenderAndType(string gender, string typeOfStudent)
         {
             PrintStudents(_studentRepository.GetStudentsByGenderAndElementary(gender, typeOfStudent));
         }

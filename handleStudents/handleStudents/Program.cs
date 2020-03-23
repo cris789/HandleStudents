@@ -36,14 +36,20 @@ namespace handleStudents
 
                 if (name.Length > 0)
                 {
+                    Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
+                    Console.WriteLine($"Results of search student by name: {name}");
                     studentService.SearchStudentsByName(name);
                 }
                 else if (gender.Length > 0 && type.Length > 0)
                 {
-                    studentService.SearchStudentsByGenderAndElementary(gender, type);
+                    Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
+                    Console.WriteLine($"Results of search student by gender: {gender} and type: {type}");
+                    studentService.SearchStudentsByGenderAndType(gender, type);
                 }
                 else if (type.Length > 0)
                 {
+                    Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
+                    Console.WriteLine($"Results of search student by type: {type}");
                     studentService.SearchStudentsByTypeOfStudent(type);
                 }
             }
@@ -106,7 +112,7 @@ namespace handleStudents
                     string typeStudent = (Console.ReadLine()).ToLower();
                     Console.WriteLine("Please, insert the gender of your student to search, you can choose between M(Male) and F(Female)");
                     string genderStudent = (Console.ReadLine()).ToUpper();
-                    studentService.SearchStudentsByGenderAndElementary(genderStudent, typeStudent);
+                    studentService.SearchStudentsByGenderAndType(genderStudent, typeStudent);
                     goto Start;
                 case 7:
                     break;

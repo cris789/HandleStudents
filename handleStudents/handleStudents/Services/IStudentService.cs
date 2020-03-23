@@ -12,7 +12,7 @@ namespace handleStudents.Services
         public void GetAllStudents();
         public void SearchStudentsByName(string name);
         public void SearchStudentsByTypeOfStudent(string typeOfStudent);
-        public void SearchStudentsByGenderAndElementary(string gender, string typeOfStudent);
+        public void SearchStudentsByGenderAndType(string gender, string typeOfStudent);
         public void ReadCsvFile(string path);
         public Student AddStudentFromCsvFile(string name, string gender, string typeOfStudent, string enrollment);
     }
