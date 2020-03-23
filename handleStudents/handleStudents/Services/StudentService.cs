@@ -66,28 +66,16 @@ namespace handleStudents.Services
 
         public void SearchStudentsByGenderAndElementary(string gender, string typeOfStudent)
         {
-            //Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
-            //Console.WriteLine("Searh student by gender and type");
-            //Console.WriteLine("Please, insert kind of student to search, you can choose between kinder, elementary, high and university");
-            //string studentType = (Console.ReadLine()).ToLower();
-            //Console.WriteLine("Please, insert the gender of your student to search, you can choose between M(Male) and F(Female)");
-            //string genderStudent = (Console.ReadLine()).ToUpper();
             PrintStudents(_studentRepository.GetStudentsByGenderAndElementary(gender, typeOfStudent));
         }
 
         public void SearchStudentsByName(string name)
         {
-            //Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
-            //Console.WriteLine("Please, insert the student name to search");
-            //string nameStudent = Console.ReadLine();
             PrintStudents(_studentRepository.GetStudentsByName(name));
         }
 
         public void SearchStudentsByTypeOfStudent(string typeOfStudent)
         {
-            //Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
-            //Console.WriteLine("Please, insert the type of student to search,  you can choose between kinder, elementary, high and university");
-            //string studentType = (Console.ReadLine()).ToLower();
             PrintStudents(_studentRepository.GetStudentsByTypeOfStudent(typeOfStudent));
         }
 
@@ -108,12 +96,10 @@ namespace handleStudents.Services
             {
                 string currentLine;
                 int header = 0;
-                // currentLine will be null when the StreamReader reaches the end of file
                 while ((currentLine = sr.ReadLine()) != null)
                 {
                     if(header == 0)
                     {
-                        //Console.WriteLine(currentLine);
                         string[] data = currentLine.Split(',');
                         header++;
                     }
