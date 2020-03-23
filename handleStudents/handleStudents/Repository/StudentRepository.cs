@@ -37,8 +37,8 @@ namespace handleStudents.Repository
 
         public IEnumerable<Student> GetStudentsByGenderAndElementary(string gender, string studenTtype)
         {
-            var typeStudent = (StudentType)Enum.Parse(typeof(StudentType), studenTtype);
-            var studentGender = (Gender)Enum.Parse(typeof(Gender), gender);
+            var typeStudent = (StudentType)Enum.Parse(typeof(StudentType), studenTtype.ToLower());
+            var studentGender = (Gender)Enum.Parse(typeof(Gender), gender.ToUpper());
             List<Student> users = _students.FindAll(x => (x.StudentType == typeStudent) && (x.Gender == studentGender));
             users.Sort((a, b) => (b.EnrollmentDate).CompareTo(a.EnrollmentDate));
             return users;
@@ -46,12 +46,12 @@ namespace handleStudents.Repository
 
         public IEnumerable<Student> GetStudentsByName(string name)
         {
-            return (_students.Where(x => x.Name.Contains(name))).OrderBy(x => x.Name).ToList();
+            return (_students.Where(x => x.Name.Contains(name.ToLower()))).OrderBy(x => x.Name).ToList();
         }
 
         public IEnumerable<Student> GetStudentsByTypeOfStudent(string type)
         {
-            var typeStudent = (StudentType)Enum.Parse(typeof(StudentType), type);
+            var typeStudent = (StudentType)Enum.Parse(typeof(StudentType), type.ToLower());
 
             List<Student> users = _students.Where(x => x.StudentType == typeStudent).ToList();
             users.Sort((a, b) => (b.EnrollmentDate).CompareTo(a.EnrollmentDate));

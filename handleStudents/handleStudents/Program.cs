@@ -42,7 +42,7 @@ namespace handleStudents
             Console.WriteLine("Option 5: Searh student by type");
             Console.WriteLine("Option 6: Searh student by gender and type");
             Console.WriteLine("Option 7: Exit");
-            Console.WriteLine("Please select an option");
+
             int userChoise = int.Parse(Console.ReadLine());
 
             switch (userChoise)
@@ -57,13 +57,25 @@ namespace handleStudents
                     studentService.RemoveStudent();
                     goto Start;
                 case 4:
-                    studentService.SearchStudentsByName();
+                    Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
+                    Console.WriteLine("Please, insert the student name to search");
+                    string nameStudent = Console.ReadLine();
+                    studentService.SearchStudentsByName(nameStudent);
                     goto Start;
                 case 5:
-                    studentService.SearchStudentsByTypeOfStudent();
+                    Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
+                    Console.WriteLine("Please, insert the type of student to search,  you can choose between kinder, elementary, high and university");
+                    string studentType = (Console.ReadLine()).ToLower();
+                    studentService.SearchStudentsByTypeOfStudent(studentType);
                     goto Start;
                 case 6:
-                    studentService.SearchStudentsByGenderAndElementary();
+                    Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
+                    Console.WriteLine("Searh student by gender and type");
+                    Console.WriteLine("Please, insert kind of student to search, you can choose between kinder, elementary, high and university");
+                    string typeStudent = (Console.ReadLine()).ToLower();
+                    Console.WriteLine("Please, insert the gender of your student to search, you can choose between M(Male) and F(Female)");
+                    string genderStudent = (Console.ReadLine()).ToUpper();
+                    studentService.SearchStudentsByGenderAndElementary(genderStudent, typeStudent);
                     goto Start;
                 case 7:
                     break;
@@ -73,7 +85,7 @@ namespace handleStudents
             }
 
             Decide:
-            Console.WriteLine("Are you sure you want to  exit the program?, YES or NO?");
+            Console.WriteLine("Are you sure you want to  exit the program?, YES or NO");
             string userDesicion = Console.ReadLine();
             switch(userDesicion.ToLower())
             {

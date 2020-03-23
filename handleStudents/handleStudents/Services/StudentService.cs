@@ -64,31 +64,31 @@ namespace handleStudents.Services
             }
         }
 
-        public void SearchStudentsByGenderAndElementary()
+        public void SearchStudentsByGenderAndElementary(string gender, string typeOfStudent)
         {
-            Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
-            Console.WriteLine("Searh student by gender and type");
-            Console.WriteLine("Please, insert kind of student to search, you can choose between kinder, elementary, high and university");
-            string studentType = (Console.ReadLine()).ToLower();
-            Console.WriteLine("Please, insert the gender of your student to search, you can choose between M(Male) and F(Female)");
-            string genderStudent = (Console.ReadLine()).ToUpper();
-            PrintStudents(_studentRepository.GetStudentsByGenderAndElementary(genderStudent, studentType));
+            //Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
+            //Console.WriteLine("Searh student by gender and type");
+            //Console.WriteLine("Please, insert kind of student to search, you can choose between kinder, elementary, high and university");
+            //string studentType = (Console.ReadLine()).ToLower();
+            //Console.WriteLine("Please, insert the gender of your student to search, you can choose between M(Male) and F(Female)");
+            //string genderStudent = (Console.ReadLine()).ToUpper();
+            PrintStudents(_studentRepository.GetStudentsByGenderAndElementary(gender, typeOfStudent));
         }
 
-        public void SearchStudentsByName()
+        public void SearchStudentsByName(string name)
         {
-            Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
-            Console.WriteLine("Please, insert the student name to search");
-            string nameStudent = Console.ReadLine();
-            PrintStudents(_studentRepository.GetStudentsByName(nameStudent));
+            //Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
+            //Console.WriteLine("Please, insert the student name to search");
+            //string nameStudent = Console.ReadLine();
+            PrintStudents(_studentRepository.GetStudentsByName(name));
         }
 
-        public void SearchStudentsByTypeOfStudent()
+        public void SearchStudentsByTypeOfStudent(string typeOfStudent)
         {
-            Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
-            Console.WriteLine("Please, insert the type of student to search,  you can choose between kinder, elementary, high and university");
-            string studentType = (Console.ReadLine()).ToLower();
-            PrintStudents(_studentRepository.GetStudentsByTypeOfStudent(studentType));
+            //Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
+            //Console.WriteLine("Please, insert the type of student to search,  you can choose between kinder, elementary, high and university");
+            //string studentType = (Console.ReadLine()).ToLower();
+            PrintStudents(_studentRepository.GetStudentsByTypeOfStudent(typeOfStudent));
         }
 
         private void PrintStudents(IEnumerable<Student> students)
@@ -115,13 +115,11 @@ namespace handleStudents.Services
                     {
                         //Console.WriteLine(currentLine);
                         string[] data = currentLine.Split(',');
-                        Console.WriteLine($"{ data[0] } { data[1] } { data[2] } { data[3] } ");
                         header++;
                     }
                     else
                     {
                         string []data = currentLine.Split(',');
-                        Console.WriteLine($"{ data[0] } { data[1] } { data[2] } { data[3] } ");
                         AddStudentFromCsvFile(data[0] , data[1], data[2], data[3]);
                     }
                 }
@@ -135,7 +133,7 @@ namespace handleStudents.Services
             var typeStudent = (StudentType)Enum.Parse(typeof(StudentType), typeOfStudent);
             var typeStudentGender = (Gender)Enum.Parse(typeof(Gender), gender.ToUpper());
             student.Id = Guid.NewGuid();
-            student.Name = name;
+            student.Name = name.ToLower();
             student.StudentType = typeStudent;
             student.Gender = typeStudentGender;
             student.EnrollmentDate = DateTime.ParseExact(enrollment, "yyyyMMddHHmmssFFF", null);
