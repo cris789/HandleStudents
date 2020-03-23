@@ -8,11 +8,16 @@ namespace handleStudents.Services
 {
     public class StudentService : IStudentService
     {
-        public StudentRepository repository = new StudentRepository();
+        private readonly IStudentRepository _studentRepository;
+
+        public StudentService(IStudentRepository studentRepository)
+        {
+            _studentRepository = studentRepository;
+        }
 
         public void GetAllStudents()
         {
-            PrintStudents(repository.GetAllStudents());
+            PrintStudents(_studentRepository.GetAllStudents());
         }
 
         public void RegisterStudent()
@@ -31,7 +36,7 @@ namespace handleStudents.Services
             student.Name = name;
             student.StudentType = typeStudent;
             student.Gender = typeStudentGender;
-            Student resullt = repository.AddNewStudent(student);
+            Student resullt = _studentRepository.AddNewStudent(student);
             Console.WriteLine("Your student was stored successfully with the following information:");
             Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
             Console.WriteLine("Student ID                             Name            kind of student         Gender of student          Enrollment date");
@@ -44,8 +49,8 @@ namespace handleStudents.Services
             Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
             Console.WriteLine("Please, insert the ID of your student to delete");
             string studentId = Console.ReadLine();
-            repository.DeleteStudent(studentId);
-            PrintStudents(repository.GetAllStudents());
+            _studentRepository.DeleteStudent(studentId);
+            PrintStudents(_studentRepository.GetAllStudents());
         }
 
         public void SearchStudentsByGenderAndElementary()
@@ -56,7 +61,7 @@ namespace handleStudents.Services
             string studentType = (Console.ReadLine()).ToLower();
             Console.WriteLine("Please, insert the gender of your student to search, you can choose between M(Male) and F(Female)");
             string genderStudent = (Console.ReadLine()).ToUpper();
-            PrintStudents(repository.GetStudentsByGenderAndElementary(genderStudent, studentType));
+            PrintStudents(_studentRepository.GetStudentsByGenderAndElementary(genderStudent, studentType));
         }
 
         public void SearchStudentsByName()
@@ -64,7 +69,7 @@ namespace handleStudents.Services
             Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
             Console.WriteLine("Please, insert the student name to search");
             string nameStudent = Console.ReadLine();
-            PrintStudents(repository.GetStudentsByName(nameStudent));
+            PrintStudents(_studentRepository.GetStudentsByName(nameStudent));
         }
 
         public void SearchStudentsByTypeOfStudent()
@@ -72,7 +77,7 @@ namespace handleStudents.Services
             Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
             Console.WriteLine("Please, insert the type of student to search,  you can choose between kinder, elementary, high and university");
             string studentType = (Console.ReadLine()).ToLower();
-            PrintStudents(repository.GetStudentsByTypeOfStudent(studentType));
+            PrintStudents(_studentRepository.GetStudentsByTypeOfStudent(studentType));
         }
 
         private void PrintStudents(IEnumerable<Student> students)
