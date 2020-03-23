@@ -8,11 +8,10 @@ namespace handleStudents.Repository
     public interface IStudentRepository
     {
         public Student AddNewStudent( Student student);
-        public Student GetStudent();
         public IEnumerable<Student> GetAllStudents();
-        public Boolean DeleteStudent(Guid id);
+        public Boolean DeleteStudent(string id);
         public IEnumerable<Student> GetStudentsByName( string name);
-        public IEnumerable<Student> GetStudentsByTypeOfSchool(string school);
-        public IEnumerable<Student> GetStudentsByGender(string gender);
+        public IEnumerable<Student> GetStudentsByTypeOfStudent(string school);
+        public IEnumerable<Student> GetStudentsByGenderAndElementary(string gender, string studenTtype);
     }
 }

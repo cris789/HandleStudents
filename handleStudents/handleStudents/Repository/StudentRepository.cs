@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using handleStudents.Models;
 
@@ -14,34 +15,41 @@ namespace handleStudents.Repository
             _students = new List<Student>();
         }
 
-        public bool DeleteStudent(Guid id)
+        public bool DeleteStudent(string id)
         {
-            throw new NotImplementedException();
+            Guid oldGuid = Guid.Parse(id);
+            var item = _students.SingleOrDefault(x => x.Id == oldGuid);
+            if (item != null)
+                _students.Remove(item);
+                return true;
         }
 
         public IEnumerable<Student> GetAllStudents()
         {
-            return _students;
+            return _students.OrderBy(x => x.Name).ToList(); ;
         }
 
-        public Student GetStudent()
+        public IEnumerable<Student> GetStudentsByGenderAndElementary(string gender, string studenTtype)
         {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Student> GetStudentsByGender(string gender)
-        {
-            throw new NotImplementedException();
+            var typeStudent = (StudentType)Enum.Parse(typeof(StudentType), studenTtype);
+            var studentGender = (Gender)Enum.Parse(typeof(Gender), gender);
+            List<Student> users = _students.FindAll(x => (x.StudentType == typeStudent) && (x.Gender == studentGender));
+            users.Sort((a, b) => (b.EnrollmentDate).CompareTo(a.EnrollmentDate));
+            return users;
         }
 
         public IEnumerable<Student> GetStudentsByName(string name)
         {
-            throw new NotImplementedException();
+            return (_students.Where(x => x.Name.Contains(name))).OrderBy(x => x.Name).ToList();
         }
 
-        public IEnumerable<Student> GetStudentsByTypeOfSchool(string school)
+        public IEnumerable<Student> GetStudentsByTypeOfStudent(string type)
         {
-            throw new NotImplementedException();
+            var typeStudent = (StudentType)Enum.Parse(typeof(StudentType), type);
+
+            List<Student> users = _students.Where(x => x.StudentType == typeStudent).ToList();
+            users.Sort((a, b) => (b.EnrollmentDate).CompareTo(a.EnrollmentDate));
+            return users;
         }
 
         public Student AddNewStudent(Student student)
