@@ -88,7 +88,14 @@ namespace handleStudents
                     studentService.PrintStudents(studentService.GetAllStudents());
                     goto Start;
                 case 2:
-                    Student result = studentService.RegisterStudent();
+                    Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
+                    Console.WriteLine("Please, insert the name of your student");
+                    string nameOfStudent = Console.ReadLine();
+                    Console.WriteLine("Please, insert kind of student, you can choose between kinder, elementary, high and university");
+                    string studentOfType = Console.ReadLine();
+                    Console.WriteLine("Please, insert the gender of your student, you can choose between M(Male) and F(Female)");
+                    string genderOfStudent = Console.ReadLine();
+                    Student result = studentService.RegisterStudent(nameOfStudent, studentOfType, genderOfStudent);
                     Console.WriteLine("Your student was stored successfully with the following information:");
                     Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
                     Console.WriteLine("Student ID                             Name            kind of student         Gender of student          Enrollment date");

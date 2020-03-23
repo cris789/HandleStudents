@@ -29,22 +29,15 @@ namespace handleStudents.Services
         ///   This function register a student
         /// </summary>
         /// <param name="name">the name of the student</param>
-        /// <param name="type">you can choose between kinder, elementary, high and university</param>
+        /// <param name="typeOfStudent">you can choose between kinder, elementary, high and university</param>
         /// <param name="gender">you can choose between M(Male) and F(Female)</param>
         /// <returns>Print on console the student that was registered</returns>
         /// <response code="200">The token was generated.</response>
-        public Student RegisterStudent()
+        public Student RegisterStudent(string name, string typeOfStudent, string gender)
         {
             Student student= new Student();
-            Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
-            Console.WriteLine("Please, insert the name of your student");
-            string name = Console.ReadLine();
-            Console.WriteLine("Please, insert kind of student, you can choose between kinder, elementary, high and university");
-            string studentType = Console.ReadLine();
-            var typeStudent = (StudentType)Enum.Parse(typeof(StudentType), studentType);
-            Console.WriteLine("Please, insert the gender of your student, you can choose between M(Male) and F(Female)");
-            string genderStudent = Console.ReadLine();
-            var typeStudentGender = (Gender)Enum.Parse(typeof(Gender), genderStudent);
+            var typeStudent = (StudentType)Enum.Parse(typeof(StudentType), typeOfStudent);
+            var typeStudentGender = (Gender)Enum.Parse(typeof(Gender), gender);
             student.Id = Guid.NewGuid();
             student.Name = name;
             student.StudentType = typeStudent;
