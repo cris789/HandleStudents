@@ -12,9 +12,10 @@ namespace handleStudents
     {
         private static ServiceProvider _serviceProvider;
 
-        /// <param name="intOption">An option whose argument is parsed as an int</param>
-        /// <param name="boolOption">An option whose argument is parsed as a bool</param>
-        /// <param name="fileOption">An option whose argument is parsed as a FileInfo</param>
+        /// <param name="name">An option whose argument is parsed as an int</param>
+        /// <param name="type">An option whose argument is parsed as a bool</param>
+        /// <param name="gender">An option whose argument is parsed as a FileInfo</param>
+        /// <param name="input">An option whose argument is parsed as a FileInfo</param>
         static void Main(string name = "", string type = "", string gender = "", FileInfo input = null)
         {
             RegisterServices();
@@ -103,7 +104,10 @@ namespace handleStudents
                     Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
                     goto Start;
                 case 3:
-                    studentService.RemoveStudent();
+                    Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
+                    Console.WriteLine("Please, insert the ID of your student to delete");
+                    string studentId = Console.ReadLine();
+                    studentService.RemoveStudent(studentId);
                     goto Start;
                 case 4:
                     Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");

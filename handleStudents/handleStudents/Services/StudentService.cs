@@ -50,16 +50,13 @@ namespace handleStudents.Services
         /// <summary>
         ///   This function remove a student
         /// </summary>
-        /// <param name="studentId">the student id</param>
+        /// <param name="id">the student id</param>
         /// <returns>Print on console the all students after to remove the student</returns>
         /// <response boolean="true">confirm if the user was deleted</response>
         /// <response boolean="false">"The student that you wish delete was not found</response>
-        public Boolean RemoveStudent()
+        public Boolean RemoveStudent(string id)
         {
-            Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
-            Console.WriteLine("Please, insert the ID of your student to delete");
-            string studentId = Console.ReadLine();
-            if (_studentRepository.DeleteStudent(studentId))
+            if (_studentRepository.DeleteStudent(id))
             {
                 PrintStudents(_studentRepository.GetAllStudents());
                 return true;
@@ -67,7 +64,7 @@ namespace handleStudents.Services
             else
             {
                 Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
-                Console.WriteLine($"The student that you wish delete was not found with id: {studentId}");
+                Console.WriteLine($"The student that you wish delete was not found with id: {id}");
                 Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
                 return false;            
             }
@@ -166,8 +163,8 @@ namespace handleStudents.Services
             student.StudentType = typeStudent;
             student.Gender = typeStudentGender;
             student.EnrollmentDate = DateTime.ParseExact(enrollment, "yyyyMMddHHmmssFFF", null);
-            Student resullt = _studentRepository.AddNewStudent(student);
-            return resullt;
+            Student result = _studentRepository.AddNewStudent(student);
+            return result;
         }
     }
 }

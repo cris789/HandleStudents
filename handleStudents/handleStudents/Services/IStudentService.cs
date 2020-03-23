@@ -8,7 +8,7 @@ namespace handleStudents.Services
    public interface IStudentService
     {
         public Student RegisterStudent(string name, string typeStudent, string gender);
-        public Boolean RemoveStudent();
+        public Boolean RemoveStudent(string id);
         public IEnumerable<Student> GetAllStudents();
         public IEnumerable<Student> SearchStudentsByName(string name);
         public IEnumerable<Student> SearchStudentsByTypeOfStudent(string typeOfStudent);
