@@ -38,19 +38,19 @@ namespace handleStudents
                 {
                     Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
                     Console.WriteLine($"Results of search student by name: {name}");
-                    studentService.SearchStudentsByName(name);
+                    studentService.PrintStudents(studentService.SearchStudentsByName(name));
                 }
                 else if (gender.Length > 0 && type.Length > 0)
                 {
                     Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
                     Console.WriteLine($"Results of search student by gender: {gender} and type: {type}");
-                    studentService.SearchStudentsByGenderAndType(gender, type);
+                    studentService.PrintStudents(studentService.SearchStudentsByGenderAndType(gender, type));
                 }
                 else if (type.Length > 0)
                 {
                     Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
                     Console.WriteLine($"Results of search student by type: {type}");
-                    studentService.SearchStudentsByTypeOfStudent(type);
+                    studentService.PrintStudents(studentService.SearchStudentsByTypeOfStudent(type));
                 }
             }
 
@@ -79,16 +79,21 @@ namespace handleStudents
             Console.WriteLine("Option 5: Searh student by type");
             Console.WriteLine("Option 6: Searh student by gender and type");
             Console.WriteLine("Option 7: Exit");
-
+            Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
             int userChoise = int.Parse(Console.ReadLine());
 
             switch (userChoise)
             {
                 case 1:
-                    studentService.GetAllStudents();
+                    studentService.PrintStudents(studentService.GetAllStudents());
                     goto Start;
                 case 2:
-                    studentService.RegisterStudent();
+                    Student result = studentService.RegisterStudent();
+                    Console.WriteLine("Your student was stored successfully with the following information:");
+                    Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
+                    Console.WriteLine("Student ID                             Name            kind of student         Gender of student          Enrollment date");
+                    Console.WriteLine($"{result.Id}   {result.Name}           {result.StudentType}                    {result.Gender}                        {result.EnrollmentDate}");
+                    Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
                     goto Start;
                 case 3:
                     studentService.RemoveStudent();
@@ -97,13 +102,13 @@ namespace handleStudents
                     Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
                     Console.WriteLine("Please, insert the student name to search");
                     string nameStudent = Console.ReadLine();
-                    studentService.SearchStudentsByName(nameStudent);
+                    studentService.PrintStudents(studentService.SearchStudentsByName(nameStudent));
                     goto Start;
                 case 5:
                     Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
                     Console.WriteLine("Please, insert the type of student to search,  you can choose between kinder, elementary, high and university");
                     string studentType = (Console.ReadLine()).ToLower();
-                    studentService.SearchStudentsByTypeOfStudent(studentType);
+                    studentService.PrintStudents(studentService.SearchStudentsByTypeOfStudent(studentType));
                     goto Start;
                 case 6:
                     Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
@@ -112,7 +117,7 @@ namespace handleStudents
                     string typeStudent = (Console.ReadLine()).ToLower();
                     Console.WriteLine("Please, insert the gender of your student to search, you can choose between M(Male) and F(Female)");
                     string genderStudent = (Console.ReadLine()).ToUpper();
-                    studentService.SearchStudentsByGenderAndType(genderStudent, typeStudent);
+                    studentService.PrintStudents(studentService.SearchStudentsByGenderAndType(genderStudent, typeStudent));
                     goto Start;
                 case 7:
                     break;

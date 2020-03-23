@@ -3,7 +3,6 @@ using handleStudents.Repository;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace handleStudents.Services
 {
@@ -21,9 +20,9 @@ namespace handleStudents.Services
         ///   and send the information to print on console
         /// </summary>
         /// <returns>List of students </returns>
-        public void GetAllStudents()
+        public IEnumerable<Student> GetAllStudents()
         {
-            PrintStudents(_studentRepository.GetAllStudents());
+            return _studentRepository.GetAllStudents();
         }
 
         /// <summary>
@@ -34,7 +33,7 @@ namespace handleStudents.Services
         /// <param name="gender">you can choose between M(Male) and F(Female)</param>
         /// <returns>Print on console the student that was registered</returns>
         /// <response code="200">The token was generated.</response>
-        public void RegisterStudent()
+        public Student RegisterStudent()
         {
             Student student= new Student();
             Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
@@ -51,13 +50,8 @@ namespace handleStudents.Services
             student.StudentType = typeStudent;
             student.Gender = typeStudentGender;
             student.EnrollmentDate = DateTime.Now;
-
-            Student resullt = _studentRepository.AddNewStudent(student);
-            Console.WriteLine("Your student was stored successfully with the following information:");
-            Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
-            Console.WriteLine("Student ID                             Name            kind of student         Gender of student          Enrollment date");
-            Console.WriteLine($"{resullt.Id}   {resullt.Name}           {resullt.StudentType}                    {resullt.Gender}                        {resullt.EnrollmentDate}");
-            Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
+            Student result = _studentRepository.AddNewStudent(student);
+            return result;
         }
 
         /// <summary>
@@ -67,7 +61,7 @@ namespace handleStudents.Services
         /// <returns>Print on console the all students after to remove the student</returns>
         /// <response boolean="true">confirm if the user was deleted</response>
         /// <response boolean="false">"The student that you wish delete was not found</response>
-        public void RemoveStudent()
+        public Boolean RemoveStudent()
         {
             Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
             Console.WriteLine("Please, insert the ID of your student to delete");
@@ -75,12 +69,14 @@ namespace handleStudents.Services
             if (_studentRepository.DeleteStudent(studentId))
             {
                 PrintStudents(_studentRepository.GetAllStudents());
+                return true;
             }
             else
             {
                 Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
                 Console.WriteLine($"The student that you wish delete was not found with id: {studentId}");
                 Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
+                return false;            
             }
         }
 
@@ -90,9 +86,9 @@ namespace handleStudents.Services
         /// <param name="gender">insert the gender of student </param>
         /// <param name="typeOfStudent">insert the type of student</param>
         /// <returns>Print on console the all students order by most recent</returns>
-        public void SearchStudentsByGenderAndType(string gender, string typeOfStudent)
+        public IEnumerable<Student> SearchStudentsByGenderAndType(string gender, string typeOfStudent)
         {
-            PrintStudents(_studentRepository.GetStudentsByGenderAndType(gender, typeOfStudent));
+            return _studentRepository.GetStudentsByGenderAndType(gender, typeOfStudent);
         }
 
         /// <summary>
@@ -100,9 +96,9 @@ namespace handleStudents.Services
         /// </summary>
         /// <param name="name">insert the name of student </param>
         /// <returns>Print on console the all students order by most recent</returns>
-        public void SearchStudentsByName(string name)
+        public IEnumerable<Student> SearchStudentsByName(string name)
         {
-            PrintStudents(_studentRepository.GetStudentsByName(name));
+             return _studentRepository.GetStudentsByName(name);
         }
 
         /// <summary>
@@ -110,9 +106,9 @@ namespace handleStudents.Services
         /// </summary>
         /// <param name="typeOfStudent">insert type of student </param>
         /// <returns>Print on console the all students order by most recent</returns>
-        public void SearchStudentsByTypeOfStudent(string typeOfStudent)
+        public IEnumerable<Student> SearchStudentsByTypeOfStudent(string typeOfStudent)
         {
-            PrintStudents(_studentRepository.GetStudentsByTypeOfStudent(typeOfStudent));
+            return _studentRepository.GetStudentsByTypeOfStudent(typeOfStudent);
         }
 
         /// <summary>
@@ -120,7 +116,7 @@ namespace handleStudents.Services
         /// </summary>
         /// <param name="students"> insert IEnumerable<Student> this a students list </param>
         /// <returns>Print on console the all students</returns>
-        private void PrintStudents(IEnumerable<Student> students)
+        public void PrintStudents(IEnumerable<Student> students)
         {
             Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
             Console.WriteLine("Student ID                             Name            kind of student         Gender of student          Enrollment date");

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using handleStudents.Exceptions;
 using handleStudents.Models;
 
@@ -89,7 +88,7 @@ namespace handleStudents.Repository
         ///   This function store a student on the students list
         /// </summary>
         /// <param name="student">information of student to store</param>
-        /// <returns>return a student that was stored/returns>
+        /// <returns>return a student that was stored</returns>
         public Student AddNewStudent(Student student)
         {
             student.Name = student.Name.ToLower();
