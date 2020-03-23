@@ -27,13 +27,44 @@ namespace handleStudents
             Console.WriteLine($"The value of name is: {name}");
             Console.WriteLine($"The value of type is: {type}");
             Console.WriteLine($"The value of gender is: {gender}");
-            Console.WriteLine($"The value of fileOption is: {input?.FullName ?? "C:/Users/Cristian/Desktop/Heber/st/st/MOCK_DATA.csv" }");
-            Console.WriteLine("The value for --int-option ");
-            studentService.ReadCsvFile("C:/Users/Cristian/Desktop/Heber/st/st/MOCK_DATA.csv");
+            Console.WriteLine($"The value of input file is: {input?.FullName ?? "Nothing file" }");
+            Console.WriteLine("Welcome to console app to handle students!");
+
+            if (input != null)
+            {
+                studentService.ReadCsvFile(input.FullName);
+
+                if (name.Length > 0)
+                {
+                    studentService.SearchStudentsByName(name);
+                }
+                else if (gender.Length > 0 && type.Length > 0)
+                {
+                    studentService.SearchStudentsByGenderAndElementary(gender, type);
+                }
+                else if (type.Length > 0)
+                {
+                    studentService.SearchStudentsByTypeOfStudent(type);
+                }
+            }
+
+            Console.WriteLine("Do you like use fake students to try the program? yes/no");
+
+            string userChoose = Console.ReadLine();
+            switch (userChoose.ToLower())
+            {
+                case "no":
+                    goto Start;
+                case "yes":
+                    mockTool.InsertStudents();
+                    studentService.GetAllStudents();
+                    goto Start;
+            }
+
+        Start:
 
             Console.WriteLine("Welcome to console app to handle students!");
 
-        Start:
             Console.WriteLine("Please select an option");
             Console.WriteLine("Option 1: Get all students");
             Console.WriteLine("Option 2: Insert student");
@@ -85,7 +116,7 @@ namespace handleStudents
             }
 
             Decide:
-            Console.WriteLine("Are you sure you want to  exit the program?, YES or NO");
+            Console.WriteLine("Are you sure you want to  exit the program?, yes/no");
             string userDesicion = Console.ReadLine();
             switch(userDesicion.ToLower())
             {
