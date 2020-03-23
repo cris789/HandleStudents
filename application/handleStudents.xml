@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>handleStudents</name>
+    </assembly>
+    <members>
+        <member name="M:handleStudents.Program.Main(System.String,System.String,System.String,System.IO.FileInfo)">
+            <param name="name">An option whose argument is parsed as an int</param>
+            <param name="type">An option whose argument is parsed as a bool</param>
+            <param name="gender">An option whose argument is parsed as a FileInfo</param>
+            <param name="input">An option whose argument is parsed as a FileInfo</param>
+        </member>
+        <member name="M:handleStudents.Repository.StudentRepository.DeleteStudent(System.String)">
+            <summary>
+              This function delete a student
+            </summary>
+            <param name="id">id of the student to delete</param>
+            <returns>boolean to confirm if the student was deleted </returns>
+             <exception cref="T:System.Exception">Thrown when one id is incorrect format, 
+            because the id is Guid.</exception>
+        </member>
+        <member name="M:handleStudents.Repository.StudentRepository.GetAllStudents">
+            <summary>
+              This function return all students
+            </summary>
+            <returns>return all students order by alphabetically</returns>
+        </member>
+        <member name="M:handleStudents.Repository.StudentRepository.GetStudentsByGenderAndType(System.String,System.String)">
+            <summary>
+              This function Get students by gender and type 
+            </summary>
+            <param name="studenTtype">you can choose between kinder, elementary, high and university</param>
+            <param name="gender">you can choose between M(Male) and F(Female)</param>
+            <returns>return all students order by most recent to least recent</returns>
+        </member>
+        <member name="M:handleStudents.Repository.StudentRepository.GetStudentsByName(System.String)">
+            <summary>
+              This function return all students with the same name
+            </summary>
+            <param name="name">name of student to search</param>
+            <returns>return all order by alphabetically </returns>
+        </member>
+        <member name="M:handleStudents.Repository.StudentRepository.GetStudentsByTypeOfStudent(System.String)">
+            <summary>
+              This function return all students  by type
+            </summary>
+            <param name="type">you can choose between kinder, elementary, high and university</param>
+            <returns>return all students  by type order by most recent to least recent </returns>
+        </member>
+        <member name="M:handleStudents.Repository.StudentRepository.AddNewStudent(handleStudents.Models.Student)">
+            <summary>
+              This function store a student on the students list
+            </summary>
+            <param name="student">information of student to store</param>
+            <returns>return a student that was stored</returns>
+        </member>
+        <member name="M:handleStudents.Services.StudentService.GetAllStudents">
+            <summary>
+              This function return all students from studen list
+              and send the information to print on console
+            </summary>
+            <returns>List of students </returns>
+        </member>
+        <member name="M:handleStudents.Services.StudentService.RegisterStudent(System.String,System.String,System.String)">
+            <summary>
+              This function register a student
+            </summary>
+            <param name="name">the name of the student</param>
+            <param name="typeOfStudent">you can choose between kinder, elementary, high and university</param>
+            <param name="gender">you can choose between M(Male) and F(Female)</param>
+            <returns>Print on console the student that was registered</returns>
+            <response code="200">The token was generated.</response>
+        </member>
+        <member name="M:handleStudents.Services.StudentService.RemoveStudent(System.String)">
+            <summary>
+              This function remove a student
+            </summary>
+            <param name="id">the student id</param>
+            <returns>Print on console the all students after to remove the student</returns>
+            <response boolean="true">confirm if the user was deleted</response>
+            <response boolean="false">"The student that you wish delete was not found</response>
+        </member>
+        <member name="M:handleStudents.Services.StudentService.SearchStudentsByGenderAndType(System.String,System.String)">
+            <summary>
+              This function Search students by gender and type
+            </summary>
+            <param name="gender">insert the gender of student </param>
+            <param name="typeOfStudent">insert the type of student</param>
+            <returns>Print on console the all students order by most recent</returns>
+        </member>
+        <member name="M:handleStudents.Services.StudentService.SearchStudentsByName(System.String)">
+            <summary>
+              This function search students by name
+            </summary>
+            <param name="name">insert the name of student </param>
+            <returns>Print on console the all students order by most recent</returns>
+        </member>
+        <member name="M:handleStudents.Services.StudentService.SearchStudentsByTypeOfStudent(System.String)">
+            <summary>
+              This function search students by type
+            </summary>
+            <param name="typeOfStudent">insert type of student </param>
+            <returns>Print on console the all students order by most recent</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:handleStudents.Services.StudentService.PrintStudents(System.Collections.Generic.IEnumerable{handleStudents.Models.Student})" -->
+        <member name="M:handleStudents.Services.StudentService.ReadCsvFile(System.String)">
+            <summary>
+              This function read csv file and send the information to add the student
+            </summary>
+            <param name="path">the path of the csv file</param>
+            <returns>Print on console the all students</returns>
+        </member>
+        <member name="M:handleStudents.Services.StudentService.AddStudentFromCsvFile(System.String,System.String,System.String,System.String)">
+            <summary>
+              This function add student from csv file
+            </summary>
+            <param name="name">the name of the student</param>
+            <param name="typeOfStudent">you can choose between kinder, elementary, high and university</param>
+            <param name="gender">you can choose between M(Male) and F(Female)</param>
+            <param name="enrollment">insert the date of student enrollment on string</param>
+            <returns>return a student that was registered</returns>
+        </member>
+    </members>
+</doc>
