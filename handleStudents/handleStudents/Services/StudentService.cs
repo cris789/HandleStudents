@@ -2,6 +2,7 @@
 using handleStudents.Repository;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace handleStudents.Services
@@ -36,6 +37,8 @@ namespace handleStudents.Services
             student.Name = name;
             student.StudentType = typeStudent;
             student.Gender = typeStudentGender;
+            student.EnrollmentDate = DateTime.Now;
+
             Student resullt = _studentRepository.AddNewStudent(student);
             Console.WriteLine("Your student was stored successfully with the following information:");
             Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
@@ -97,6 +100,47 @@ namespace handleStudents.Services
                 Console.WriteLine($"{user.Id}   {user.Name}            {user.StudentType}                   {user.Gender}                         {user.EnrollmentDate}");
             }
             Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
+        }
+
+        public void ReadCsvFile(string path)
+        {
+            using (StreamReader sr = new StreamReader(path))
+            {
+                string currentLine;
+                int header = 0;
+                // currentLine will be null when the StreamReader reaches the end of file
+                while ((currentLine = sr.ReadLine()) != null)
+                {
+                    if(header == 0)
+                    {
+                        //Console.WriteLine(currentLine);
+                        string[] data = currentLine.Split(',');
+                        Console.WriteLine($"{ data[0] } { data[1] } { data[2] } { data[3] } ");
+                        header++;
+                    }
+                    else
+                    {
+                        string []data = currentLine.Split(',');
+                        Console.WriteLine($"{ data[0] } { data[1] } { data[2] } { data[3] } ");
+                        AddStudentFromCsvFile(data[0] , data[1], data[2], data[3]);
+                    }
+                }
+            }
+            GetAllStudents();
+        }
+
+        public Student AddStudentFromCsvFile(string name, string gender, string typeOfStudent, string enrollment)
+        {
+            Student student = new Student();
+            var typeStudent = (StudentType)Enum.Parse(typeof(StudentType), typeOfStudent);
+            var typeStudentGender = (Gender)Enum.Parse(typeof(Gender), gender.ToUpper());
+            student.Id = Guid.NewGuid();
+            student.Name = name;
+            student.StudentType = typeStudent;
+            student.Gender = typeStudentGender;
+            student.EnrollmentDate = DateTime.ParseExact(enrollment, "yyyyMMddHHmmssFFF", null);
+            Student resullt = _studentRepository.AddNewStudent(student);
+            return resullt;
         }
     }
 }

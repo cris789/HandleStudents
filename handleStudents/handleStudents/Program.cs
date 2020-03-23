@@ -4,6 +4,7 @@ using handleStudents.Services;
 using handleStudents.Tools;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.IO;
 
 namespace handleStudents
 {
@@ -11,18 +12,26 @@ namespace handleStudents
     {
         private static ServiceProvider _serviceProvider;
 
-        static void Main(string[] args)
+        /// <param name="intOption">An option whose argument is parsed as an int</param>
+        /// <param name="boolOption">An option whose argument is parsed as a bool</param>
+        /// <param name="fileOption">An option whose argument is parsed as a FileInfo</param>
+        static void Main(string name = "", string type = "", string gender = "", FileInfo input = null)
         {
             RegisterServices();
 
             var studentService = _serviceProvider.GetService<IStudentService>();
             var mockTool = _serviceProvider.GetService<IMockTool>();
 
-
             DisposeServices();
 
+            Console.WriteLine($"The value of name is: {name}");
+            Console.WriteLine($"The value of type is: {type}");
+            Console.WriteLine($"The value of gender is: {gender}");
+            Console.WriteLine($"The value of fileOption is: {input?.FullName ?? "C:/Users/Cristian/Desktop/Heber/st/st/MOCK_DATA.csv" }");
+            Console.WriteLine("The value for --int-option ");
+            studentService.ReadCsvFile("C:/Users/Cristian/Desktop/Heber/st/st/MOCK_DATA.csv");
+
             Console.WriteLine("Welcome to console app to handle students!");
-            mockTool.InsertStudents();
 
         Start:
             Console.WriteLine("Please select an option");
