@@ -12,31 +12,15 @@ namespace handleStudents
 
         static void Main(string[] args)
         {
-            //Console.WriteLine("Hello World!");
-
-            //StudentRepository repository = new StudentRepository();
-            //StudentService studentService = new StudentService();
-            //Student student = new Student();
-            //student.Id = Guid.NewGuid();
-            //student.Name = "jino";
-            //student.StudentType = StudentType.elementary;
-            //student.Gender = Gender.M;
-            //Student student2 = new Student();
-            //student2.Id = Guid.NewGuid();
-            //student2.Name = "alex";
-            //student2.StudentType = StudentType.kinder;
-            //student2.Gender = Gender.M;
-            //Student r = repository.AddNewStudent(student);
-            //Student rr = repository.AddNewStudent(student2);
-            //Console.WriteLine($"{r.Id} {r.Name} {r.StudentType} {r.Gender} {r.EnrollmentDate}");
-
-
             RegisterServices();
+            
 
             var studentService = _serviceProvider.GetService<IStudentService>();
 
 
             DisposeServices();
+
+            Console.WriteLine("Welcome to console app to handle students!");
 
         Start:
             Console.WriteLine("Please select an option");
