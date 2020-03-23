@@ -49,8 +49,16 @@ namespace handleStudents.Services
             Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
             Console.WriteLine("Please, insert the ID of your student to delete");
             string studentId = Console.ReadLine();
-            _studentRepository.DeleteStudent(studentId);
-            PrintStudents(_studentRepository.GetAllStudents());
+            if (_studentRepository.DeleteStudent(studentId))
+            {
+                PrintStudents(_studentRepository.GetAllStudents());
+            }
+            else
+            {
+                Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
+                Console.WriteLine($"The student that you wish delete was not found with id: {studentId}");
+                Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
+            }
         }
 
         public void SearchStudentsByGenderAndElementary()
