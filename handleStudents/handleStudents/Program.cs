@@ -54,18 +54,20 @@ namespace handleStudents
                     studentService.PrintStudents(studentService.SearchStudentsByTypeOfStudent(type));
                 }
             }
-
-            Console.WriteLine("Do you like use fake students to try the program? yes/no");
-
-            string userChoose = Console.ReadLine();
-            switch (userChoose.ToLower())
+            else
             {
-                case "no":
-                    goto Start;
-                case "yes":
-                    mockTool.InsertStudents();
-                    studentService.GetAllStudents();
-                    goto Start;
+                Console.WriteLine("Do you like use fake data of students to try the program? yes/no");
+
+                string userChoose = Console.ReadLine();
+                switch (userChoose.ToLower())
+                {
+                    case "no":
+                        goto Start;
+                    case "yes":
+                        mockTool.InsertStudents();
+                        studentService.GetAllStudents();
+                        goto Start;
+                }
             }
 
         Start:
