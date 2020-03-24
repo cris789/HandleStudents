@@ -1,5 +1,4 @@
-#    Handle Students
-
+#    Handle Students Application
 
 The main project is locate inside **handleStudents/handleStudents** folder.
 
@@ -85,5 +84,3 @@ only you to go at **test** folder.
 and the following command
 
 ### `dotnet vstest HandleStudentUniTest.dll`
-
-
