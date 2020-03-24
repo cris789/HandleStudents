@@ -14,7 +14,7 @@ The unitest .dll is locate inside **test** folder.
 
 In the project directory, you can run:
 
-Note: this commands only run on CMD and Powershell
+**Note: this commands only run on CMD and Powershell**
 
 To build the main project:
 
@@ -76,3 +76,14 @@ To run the application with csv file and search an student by type and gender
 ### `.\handleStudents.exe --type kinder --gender F --input .\MOCK_DATA.csv`
 
 Also if you dont have a csv file the application have fake students to try the program
+
+
+To run the test, you can run the test directly
+
+only you to go at **test** folder.
+
+and the following command
+
+### `dotnet vstest HandleStudentUniTest.dll`
+
+
